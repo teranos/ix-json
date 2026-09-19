@@ -1,15 +1,15 @@
 /**
- * ix-json Element Module — pure TypeScript plugin glyph using the ElementUI.
+ * ix-json Element Module — pure TypeScript plugin element using the ElementUI.
  *
  * No Go backend required. Config is persisted via ui.saveConfig/loadConfig,
  * API fetches happen directly from the browser (CORS-permitting).
  *
- * Dynamically imported by the QNTX frontend when registered in glyph-registry.
+ * Dynamically imported by the QNTX frontend when registered in element-registry.
  */
 
 import type { Element, ElementUI, ElementDef, RenderFn, MeldEvent } from '@teranos/elements';
 
-export const glyphDef: ElementDef = {
+export const elementDef: ElementDef = {
     symbol: '🔄',
     title: 'JSON API Ingestor',
     label: 'ix-json',
@@ -17,11 +17,11 @@ export const glyphDef: ElementDef = {
     defaultHeight: 700,
 };
 
-export const render: RenderFn = async (glyph: Element, ui: ElementUI): Promise<HTMLElement> => {
+export const render: RenderFn = async (item: Element, ui: ElementUI): Promise<HTMLElement> => {
     const { element, titleBar, content } = ui.element({
         defaults: {
-            x: glyph.x ?? 200,
-            y: glyph.y ?? 200,
+            x: item.x ?? 200,
+            y: item.y ?? 200,
             width: 600,
             height: 700,
         },
@@ -98,13 +98,13 @@ export const render: RenderFn = async (glyph: Element, ui: ElementUI): Promise<H
         setInputValue(authTokenInput, (config.auth_token as string) || '');
     }
 
-    // React to melds — when a note/URL glyph melds from above, extract URL and use as API URL
+    // React to melds — when a note/URL element melds from above, extract URL and use as API URL
     ui.onMeld((event: MeldEvent) => {
         const url = extractUrl(event.content);
         if (url) {
             setInputValue(apiUrlInput, url);
             saveConfig(ui, apiUrlInput, authTokenInput, status).then(() => {
-                status.show(`URL received from melded glyph`);
+                status.show(`URL received from melded element`);
             });
         }
     });
