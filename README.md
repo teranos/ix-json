@@ -1,17 +1,12 @@
 # ix-json — Generic JSON API Ingestor
 
-A QNTX plugin that polls JSON APIs and transforms responses into attestations.
+A QNTX element module that polls JSON APIs and transforms responses into attestations. It is `web/element-module.ts`, drawn with [`@teranos/elements`](https://jsr.io/@teranos/elements); no backend process of its own.
 
 ## ✨ Configuration via Attestations
 
 **No TOML editing required!** All configuration is stored as attestations:
 
-1. **Enable plugin** in `am.toml` (DevOps only):
-   ```toml
-   [plugin]
-   enabled = ["ix-json"]
-   ```
-
+1. **Publish the element**: see Building
 2. **Configure in UI**: Each glyph instance has its own config stored as attestations
 3. **Per-glyph config**: Different glyphs can poll different APIs simultaneously
 
@@ -31,9 +26,8 @@ A QNTX plugin that polls JSON APIs and transforms responses into attestations.
 
 ## Usage
 
-1. **Enable**: Add `enabled = ["ix-json"]` to `am.toml` under `[plugin]`
-2. **Start**: Run `make dev`
-3. **Spawn**: Create an ix-json glyph (🔄) on the canvas
+1. **Publish**: `bun run build`, then `qntx element publish ix-json --file dist/element-module.js --to <node>`
+2. **Spawn**: Create an ix-json glyph (🔄) on the canvas
 4. **Configure**: Enter API URL, auth token, polling interval in the UI
 5. **Save**: Click "Save Config" - creates an attestation
 6. **Test**: Click "Test Fetch" to see API response
@@ -51,8 +45,12 @@ Each glyph's config is independent!
 ## Building
 
 ```bash
-make ix-json-plugin  # Builds and installs to ~/.qntx/plugins/
+bun install          # @teranos/elements comes from JSR (bunfig.toml names the scope)
+bun run typecheck
+bun run build        # dist/element-module.js, the file qntx element publish takes
 ```
+
+How a published element reaches every page: [docs/elements/publishing.md](https://github.com/teranos/QNTX/blob/main/docs/elements/publishing.md).
 
 ## Glyph UI
 
@@ -67,7 +65,7 @@ The ix-json glyph provides:
 ## Architecture
 
 - **Per-glyph config**: Subject = `ix-json-glyph-{glyph_id}`, Predicate = `configured`
-- **Plugin**: External gRPC process
+- **Module**: one ES module served from the node's `/g/ix-json.js`, no process of its own
 - **Storage**: Config and data both stored as attestations
 - **Melding**: Can be connected to other glyphs (e.g., py) to trigger downstream processing
 

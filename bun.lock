@@ -1,0 +1,20 @@
+{
+  "lockfileVersion": 1,
+  "configVersion": 1,
+  "workspaces": {
+    "": {
+      "name": "qntx-ix-json",
+      "dependencies": {
+        "@teranos/elements": "npm:@jsr/teranos__elements@1.25.3",
+      },
+      "devDependencies": {
+        "typescript": "5.7.2",
+      },
+    },
+  },
+  "packages": {
+    "@teranos/elements": ["@jsr/teranos__elements@1.25.3", "https://npm.jsr.io/~/11/@jsr/teranos__elements/1.25.3.tgz", {}, "sha512-XJ3hbI71j7GQ+aKAFBNMOHlvh885F6vR6lFernr1EJuzx0fEFJcQVHSA1JS9lY78QMjkPUj9lPIoXyD7JWNFrg=="],
+
+    "typescript": ["typescript@5.7.2", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-i5t66RHxDvVN40HfDd1PsEThGNnlMCMT3jMUuoh9/0TaqWevNontacunWyN02LA9/fIbEWlcHZcgTKb9QoaLfg=="],
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "qntx-ix-json",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "ix-json element module: a JSON API ingestor drawn with @teranos/elements, published with qntx element publish",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "bun build web/element-module.ts --target browser --format esm --outfile dist/element-module.js"
+  },
+  "dependencies": {
+    "@teranos/elements": "npm:@jsr/teranos__elements@1.25.3"
+  },
+  "devDependencies": {
+    "typescript": "5.7.2"
+  }
+}
